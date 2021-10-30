@@ -5,14 +5,14 @@ const logger=require("morgan");
 const { connect } = require("./config/database");
 const HTTPSTATUSCODE = require("./utils/httpStatusCode");
 const product = require("./app/api/routes/product.route")
-/* const user = require("./app/api/routes/user.route");
-const store = require("./app/api/routes/product.route"); */
+const user = require("./app/api/routes/user.route");
+const store = require("./app/api/routes/store.routes");
 
 connect();
 
 const app = express();
 
-/* app.set("secretKey", "nodeRestApi" );*/
+app.set("secretKey", "nodeRestApi" );
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -32,8 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 
 app.use("/product", product);
-/* app.use("/user", user);
-app.use("/store", store); */
+app.use("/user", user);
+app.use("/store", store);
 
 app.use((req, res, next) => {
     let err = new Error();
